@@ -266,7 +266,9 @@ public class RNPushNotificationHelper {
                 }
             }
 
-            int notificationID = Integer.parseInt(notificationIdString);
+            // int notificationID = Integer.parseInt(notificationIdString);
+            // HACK to support our current push notification sends down a Mongo ObjectId string in the id field.
+            int notificationID = (int) (System.currentTimeMillis() % Integer.MAX_VALUE);
 
             PendingIntent pendingIntent = PendingIntent.getActivity(context, notificationID, intent,
                     PendingIntent.FLAG_UPDATE_CURRENT);
